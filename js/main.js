@@ -40,16 +40,26 @@ function resizeCanvas() {
   viewW = rect.width;
   viewH = rect.height;
   dpr = Math.min(window.devicePixelRatio || 1, DPR_LIMIT);
-  canvas.width = Math.round(viewW * dpr);
-  canvas.height = Math.round(viewH * dpr);
+  canvas.width = Math.max(1, Math.round(viewW * dpr));
+  canvas.height = Math.max(1, Math.round(viewH * dpr));
   canvas.style.width = viewW + "px";
   canvas.style.height = viewH + "px";
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
-window.addEventListener("resize", resizeCanvas, {passive:true});
-window.addEventListener("load", () => {
+let chemBuilderStarted = false;
+function startChemBuilder() {
+  if (chemBuilderStarted) return;
+  chemBuilderStarted = true;
   resizeCanvas();
   updateReadout();
   frame();
-}, {once:true});
+}
+
+window.addEventListener("resize", resizeCanvas, {passive:true});
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", startChemBuilder, {once:true});
+} else {
+  startChemBuilder();
+}
