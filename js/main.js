@@ -8,6 +8,33 @@ const detailsEl = document.getElementById("details");
 const toastEl = document.getElementById("toast");
 const stage = document.getElementById("stage");
 
+if (!ctx) {
+  throw new Error("This browser does not support the HTML canvas element.");
+}
+
+// Safari and older mobile browsers may not provide CanvasRenderingContext2D.roundRect.
+// The renderer uses it for panels during the first frame, so provide a compatible fallback.
+if (typeof ctx.roundRect !== "function") {
+  CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius = 0) {
+    let r = Array.isArray(radius) ? Number(radius[0] || 0) : Number(radius || 0);
+    r = Math.max(0, Math.min(r, Math.abs(width) / 2, Math.abs(height) / 2));
+    const right = x + width;
+    const bottom = y + height;
+
+    this.moveTo(x + r, y);
+    this.lineTo(right - r, y);
+    this.quadraticCurveTo(right, y, right, y + r);
+    this.lineTo(right, bottom - r);
+    this.quadraticCurveTo(right, bottom, right - r, bottom);
+    this.lineTo(x + r, bottom);
+    this.quadraticCurveTo(x, bottom, x, bottom - r);
+    this.lineTo(x, y + r);
+    this.quadraticCurveTo(x, y, x + r, y);
+    this.closePath();
+    return this;
+  };
+}
+
 const DPR_LIMIT = 2;
 const trayHeight = 106;
 let viewW = 0;
