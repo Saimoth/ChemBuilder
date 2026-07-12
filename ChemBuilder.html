@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>ChemBuilder 11</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header id="header">
+    <button id="helpBtn" class="headerButton">Help</button>
+    <div id="centre">
+      <div id="formula">Start building</div>
+      <div id="compoundName">Drag atoms from the tray</div>
+      <div id="details">Structure-aware compound recognition</div>
+    </div>
+    <button id="clearBtn" class="headerButton">Clear</button>
+  </header>
 
+  <main id="stage">
+    <canvas id="gameCanvas"></canvas>
+    <button id="gameBtn">Game</button>
+
+    <section id="challengePanel">
+      <h3>Game</h3>
+      <select id="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+      <div id="challengePrompt"></div>
+      <div id="challengeFormula"></div>
+      <div id="challengeResult"></div>
+    </section>
+
+    <section id="challengeActions">
+      <button id="nextChallenge">Another</button>
+      <button id="closeChallenge">Close</button>
+    </section>
+
+    <div id="correctFlash"><div>✓<br>Correct!</div></div>
+    <div id="toast"></div>
+
+    <section id="help">
+      <h2>ChemBuilder</h2>
+      <p><b>Add:</b> drag C, H or O from the tray.</p>
+      <p><b>Bond:</b> move two atoms close together. Move them closer again to increase a single bond to double, then triple.</p>
+      <p><b>Strengthen a bond:</b> double-tap an atom. Its eligible bonded neighbours are selected in turn, upgrading single → double → triple.</p>
+      <p><b>Skeletal view:</b> the panel in the top-right hides carbon labels and carbon-bound hydrogens, so you can learn the line-angle formula while building.</p>
+      <p><b>Challenge mode:</b> build the requested compound. The game checks automatically after each change and advances after a correct answer.</p>
+      <p><b>Delete:</b> drag an atom back into the tray.</p>
+      <p>The name is determined from the complete connection pattern. C₂H₆O can therefore be recognised as ethanol or dimethyl ether.</p>
+      <button id="closeHelp">Continue</button>
+    </section>
+  </main>
+
+  <!-- Order matters: main.js owns shared state; later files add behaviour. -->
+  <script src="js/main.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/bonds.js"></script>
+  <script src="js/library.js"></script>
+  <script src="js/chemistry.js"></script>
+  <script src="js/challenge.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/physics.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/input.js"></script>
+</body>
+</html>
