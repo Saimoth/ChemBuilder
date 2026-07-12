@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <title>ChemBuilder 11</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css?v=2">
 </head>
 <body>
   <header id="header">
@@ -54,17 +54,17 @@
     </section>
   </main>
 
-  <!-- Order matters: main.js owns shared state; later files add behaviour. -->
-  <script src="js/main.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/bonds.js"></script>
-  <script src="js/library.js"></script>
-  <script src="js/chemistry.js"></script>
-  <script src="js/challenge.js"></script>
-  <script src="js/layout.js"></script>
-  <script src="js/physics.js"></script>
-  <script src="js/renderer.js"></script>
-  <script src="js/input.js"></script>
+  <!-- Classic scripts are loaded synchronously in dependency order. -->
+  <script src="./js/main.js?v=2"></script>
+  <script src="./js/utils.js?v=2"></script>
+  <script src="./js/ui.js?v=2"></script>
+  <script src="./js/bonds.js?v=2"></script>
+  <script src="./js/library.js?v=2"></script>
+  <script src="./js/chemistry.js?v=2"></script>
+  <script src="./js/challenge.js?v=2"></script>
+  <script src="./js/layout.js?v=2"></script>
+  <script src="./js/physics.js?v=2"></script>
+  <script src="./js/renderer.js?v=2"></script>
+  <script src="./js/input.js?v=2"></script>
 </body>
 </html>
